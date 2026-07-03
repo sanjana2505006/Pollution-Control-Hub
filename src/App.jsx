@@ -3,6 +3,7 @@ import AlertsPanel from './components/AlertsPanel';
 import AnalyticsInsights from './components/AnalyticsInsights';
 import CommunityHub from './components/CommunityHub';
 import Dashboard from './components/Dashboard';
+import Footer from './components/Footer';
 import HealthAdvisory from './components/HealthAdvisory';
 import LocationMap from './components/LocationMap';
 import QuizSection from './components/QuizSection';
@@ -12,7 +13,8 @@ import { CITY_COORDINATES } from './constants/cities';
 import {
   estimateWeeklyMonthlyAverages,
   fetchAirQualityByCoords,
-  fetchCityComparisons
+  fetchCityComparisons,
+  estimateExposureTime
 } from './services/airQualityService';
 
 const DEFAULT_POSITION = {
@@ -241,6 +243,11 @@ export default function App() {
   }, [position.lat, position.lon]);
 
   const analytics = useMemo(() => estimateWeeklyMonthlyAverages(trend), [trend]);
+  const exposureEstimate = useMemo(
+    () => estimateExposureTime(trend, current?.us_aqi), 
+    [trend, current]
+  );
+
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -321,7 +328,7 @@ export default function App() {
             dataCompleteness={dataCompleteness}
           />
           <LocationMap center={position} nearbyPoints={nearbyPoints} confidenceScore={confidenceScore} />
-          <AlertsPanel cityName={position.cityName} current={current} confidenceScore={confidenceScore} dataCompleteness={dataCompleteness} />
+          <AlertsPanel cityName={position.cityName} current={current} confidenceScore={confidenceScore} dataCompleteness={dataCompleteness} exposureEstimate={exposureEstimate} />
           <HealthAdvisory />
           <SolutionsAwareness />
           <AnalyticsInsights analytics={analytics} trend={trend} timeRange={timeRange} />
@@ -333,6 +340,8 @@ export default function App() {
           <QuizSection />
         </div>
       )}
+
+      <Footer />
     </main>
   );
 }
