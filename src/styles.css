@@ -741,19 +741,33 @@ a {
 /* ============================================================
    Advisory / three-col / analytics
    ============================================================ */
+/* yeh hamesha rahe, bahar hi */
 .advisory-grid,
 .three-col,
 .analytics-kpis {
   display: grid;
   gap: var(--sp-4);
-  grid-template-columns: repeat(3, 1fr);
 }
-.dashboard,
-.panel:last-child,
-.scenario-simulator,
-.content-grid > *:nth-child(4),
-.content-grid > *:nth-child(5) {
-  grid-column: span 2;
+
+/* yeh sirf desktop (900px+) ke andar */
+@media (min-width: 900px) {
+  .content-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .advisory-grid,
+  .three-col,
+  .analytics-kpis {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dashboard,
+  .panel:last-child,
+  .scenario-simulator,
+  .content-grid > *:nth-child(4),
+  .content-grid > *:nth-child(5) {
+    grid-column: span 2;
+  }
 }
 /* subtle vertical dividers between the 3 columns for extra clarity */
 .three-col > div + div {
