@@ -9,6 +9,7 @@ import LocationMap from './components/LocationMap';
 import QuizSection from './components/QuizSection';
 import SolutionsAwareness from './components/SolutionsAwareness';
 import ScenarioSimulator from './components/ScenarioSimulator';
+import AqiMissionGame from './components/AqiMissionGame';
 import { CITY_COORDINATES } from './constants/cities';
 import {
   estimateWeeklyMonthlyAverages,
@@ -86,7 +87,8 @@ function AppControls({
 function SectionNav({ activeSection, onSectionChange, theme, onToggleTheme }) {
   const sections = [
     { id: 'home', label: 'Home' },
-    { id: 'quiz', label: 'Quiz' }
+    { id: 'quiz', label: 'Quiz' },
+    { id: 'game', label: 'Game' }
   ];
   const isDark = theme === 'dark';
 
@@ -347,7 +349,7 @@ export default function App() {
 
       {error && <p className="error-banner">{error}</p>}
 
-      {activeSection === 'home' ? (
+      {activeSection === 'home' && (
         <div className="content-grid">
           <Dashboard
             cityName={position.cityName}
@@ -369,9 +371,17 @@ export default function App() {
           <ScenarioSimulator current={current} />
           <CommunityHub />
         </div>
-      ) : (
+      )}
+
+      {activeSection === 'quiz' && (
         <div className="content-grid quiz-layout">
           <QuizSection />
+        </div>
+      )}
+
+      {activeSection === 'game' && (
+        <div className="content-grid game-layout">
+          <AqiMissionGame current={current} />
         </div>
       )}
 
