@@ -245,6 +245,7 @@ a {
   padding: 0.3rem 0.75rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
@@ -276,8 +277,8 @@ a {
   padding: var(--sp-3) max(var(--sp-4), calc((100vw - 1180px) / 2));
   margin: 0 0 var(--sp-5);
   background: color-mix(in srgb, var(--panel) 86%, transparent);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 var(--line);
 }
 
