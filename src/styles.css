@@ -1177,6 +1177,24 @@ a {
   transform: translateY(-2px);
 }
 
+[data-theme="dark"] .error-banner {
+  background: color-mix(in srgb, #dc2626 12%, var(--card));
+  border-color: #dc2626;
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .location-notice {
+  background: color-mix(in srgb, #d97706 12%, var(--card));
+  border-color: #d97706;
+  color: #fcd34d;
+}
+
+[data-theme="dark"] .location-notice button {
+  background: color-mix(in srgb, #d97706 15%, var(--card));
+  border-color: #d97706;
+  color: #fcd34d;
+}
+
 /* ============================================================
    Quiz
    ============================================================ */
