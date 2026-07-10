@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSWR } from './hooks/useSWR';
 import AlertsPanel from './components/AlertsPanel';
 import AnalyticsInsights from './components/AnalyticsInsights';
@@ -297,13 +297,13 @@ export default function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const refreshNow = async () => {
+  const refreshNow = useCallback(async () => {
     if (isRefreshing) return;
     mutateAqi();
     mutateCities();
     mutateWind();
     setRefreshCountdown(AUTO_REFRESH_SECONDS);
-  };
+  }, [isRefreshing, mutateAqi, mutateCities, mutateWind]);
 
   useEffect(() => {
   const handleOnline = () => refreshNow();
